@@ -1,0 +1,21 @@
+{
+  "name": "welbex_task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "depinstall": "concurrently \"cd client && yarn install\" \"cd server && yarn install\"",
+    "start": "concurrently \"cd client && yarn start\" \"cd server && yarn start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capozz03/WelbeX.git"
+  },
+  "author": "capozz03",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/capozz03/WelbeX/issues"
+  },
+  "homepage": "https://github.com/capozz03/WelbeX#readme"
+}
