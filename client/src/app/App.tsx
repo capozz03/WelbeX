@@ -1,9 +1,12 @@
+import { Table } from 'components';
 import React from 'react';
-import Header from 'shared/ui/Header'
-import { AppRouter } from './routing/AppRouter';
 
 const App = () => {
-  return <AppRouter />
+  return (
+    <div className="App">
+      <Table />
+    </div>
+  )
 }
 
 export default App
