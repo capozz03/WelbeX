@@ -1,14 +1,5 @@
 .table__cell {
   border: 1px solid #999;
   width: 200px;
-
-  input {
-    border: none;
-    width: 80%;
-    height: 26px;
-
-    &:focus {
-      outline: none;
-    }
-  }
+  background-color: #fff;
 }

@@ -1,34 +1,37 @@
 import TableHeader from 'components/TableHeader'
 import TableRow from 'components/TableRow'
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './index.module.scss'
+import  { UsePaginationReturn } from '../../hooks/usePagination'
+import { TRating } from '../../store/slice/entities'
 
-export interface Starship {
-  name: string
-  cost_in_credits: string
-  max_atmosphering_speed: string
-  cargo_capacity: string
+
+type TTableProps = {
+  ratings: TRating[],
+  paginations: UsePaginationReturn
 }
 
-const Table = () => {
-  const starships: Array<Starship> = Array(10).fill({
-    name: 'Sand Crawler',
-    cost_in_credits: '150000',
-    max_atmosphering_speed: '30',
-    cargo_capacity: '50000',
-  })
+const Table: FC<TTableProps> = ({ ratings, paginations }) => {  
+  const {
+    offset,
+    limit,
+  } = paginations
 
-  return starships ? (
+  return ratings ? (
     <div className={styles.wrapper}>
       <div className={styles.table}>
         <TableHeader />
-        {starships.map((starship, idx) => (
-          <TableRow key={idx} starship={starship} />
+        {ratings
+          .slice(offset, limit)
+          .map((rating) => (
+          <TableRow key={rating.id} rating={rating} />
         ))}
       </div>
     </div>
   ) : (
-    <div>loading...</div>
+    <div className={styles.wrapper}>
+      <div>loading...</div>
+    </div>
   )
 }
 

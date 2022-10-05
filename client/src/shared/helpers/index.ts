@@ -1,3 +1,2 @@
-export { routes } from './routes'
-export { cookies } from './cookies'
+export { RequestStatuses } from './enums'
 
