@@ -2,11 +2,11 @@ import pg from "pg";
 
 const Pool = pg.Pool;
 const pool = new Pool({
-  user: "postgres",
-  password: "admin",
-  host: "localhost",
+  user: `${process.env.USER}`,
+  password: `${process.env.PASSWORD}`,
+  host: `${process.env.HOST}`,
   port: 5432,
-  database: "postgres_welbex",
+  database: `${process.env.DATABASE_URL}`,
 });
 
 export { pool };

@@ -8,14 +8,10 @@
     "start": "concurrently \"cd client && yarn start\" \"cd server && yarn dev\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/capozz03/WelbeX.git"
-  },
   "author": "capozz03",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/capozz03/WelbeX/issues"
-  },
-  "homepage": "https://github.com/capozz03/WelbeX#readme"
+  "engines": {
+    "node": "14.x",
+    "npm": "6.14.7"
+  }
 }
