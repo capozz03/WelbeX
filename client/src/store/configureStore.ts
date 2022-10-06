@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { ratingReducer } from './slice/ratings'
 
-const rootReducer = { }
+const rootReducer = { rating: ratingReducer }
 
 export const store = configureStore({
   reducer: rootReducer,

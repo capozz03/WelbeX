@@ -1,72 +1,58 @@
 import React, { ReactNode } from 'react'
-import styles from './index.module.scss'
 import classNames from 'classnames'
-
-export type TFilter = {
-  value: string
-  title: string
-}
+import { useFormField } from '../../hooks/useFormField'
+import { conditionOptions, filterOptions } from 'shared/helpers/options'
+import { useAppDispatch } from '../../hooks/redux'
+import { getRatingAsync, getRatingFilterAsync } from '../../store/slice/ratings'
+import { setOptions } from 'shared/helpers/setOptions'
+import styles from './index.module.scss'
 
 const TableHeader = () => {
-  const filterOptions: Array<TFilter> = [
-    {
-      value: 'date',
-      title: 'Дата',
-    },
-    {
-      value: 'name',
-      title: 'Название',
-    },
-    {
-      value: 'count',
-      title: 'Количество',
-    },
-    {
-      value: 'distance',
-      title: 'Расстояние',
-    },
-  ]
+  const filteringField = useFormField()
+  const conditionField = useFormField()
+  const argumentField = useFormField()
 
-  const conditionOptions: Array<TFilter> = [
-    {
-      value: 'equal',
-      title: 'Равно',
-    },
-    {
-      value: 'contain',
-      title: 'Содержит',
-    },
-    {
-      value: 'greater',
-      title: 'Больше',
-    },
-    {
-      value: 'less',
-      title: 'Меньше',
-    },
-  ]
+  const dispatch = useAppDispatch()
 
-  function setOptions<T extends Array<TFilter>>(options: T): ReactNode {
-    return options.map((option) => {
-      return <option value={option.value}>{option.title}</option>
-    })
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const params = {
+      field: filteringField.value,
+      condition: conditionField.value,
+      value: argumentField.value,
+    }
+    dispatch(getRatingFilterAsync(params))
+  }
+
+  const resetHandler = (e: React.FormEvent) => {
+    e.preventDefault()
+    dispatch(getRatingAsync())
   }
 
   return (
     <div>
-      <div className={styles.seacrhBar}>
-        <select className={styles.seacrhBar__filter}>
-          <option selected>Поле для фильтрации</option>
-          {setOptions(filterOptions)}
-        </select>
-        <select className={styles.seacrhBar__condition}>
-          <option selected>Выбор условия</option>
-          {setOptions(conditionOptions)}
-        </select>
-        <input name="argument" type="text" placeholder="Значение" required />
-        <button className="table-form__button" type="submit">
-          Применить фильтр
-        </button>
+      <div className={styles.searchBar}>
+        <form className={styles.searchBar__form} onSubmit={handleSubmit}>
+          <select name="filtering" required {...filteringField}>
+            {setOptions(filterOptions)}
+          </select>
+          <select name="condition" required {...conditionField}>
+            {setOptions(conditionOptions)}
+          </select>
+          <input
+            name="argument"
+            type="text"
+            placeholder="Значение"
+            required
+            {...argumentField}
+          />
+          <button type="submit">
+            Применить фильтр
+          </button>
+          <button type="reset" onClick={resetHandler}>
+            Очистить фильтры
+          </button>
+        </form>
       </div>
       <div className={classNames(styles.table__row, styles.table__row__header)}>
         <div className={styles.table__cell}>Дата</div>

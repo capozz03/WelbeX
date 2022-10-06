@@ -6,12 +6,32 @@
 
   &__header {
     font-weight: bold;
+    margin-top: 50px;
   }
+}
+
+.table__cell {
+  border: 1px solid #999;
+  background-color: #fff;
+  width: 200px;
+  text-align: center;
 }
 
 .searchBar {
   width: 800px;
-  &__filter {
-    margin: 0 15px;
+  &__form {
+    display: flex;
+    justify-content: space-around;
+    input[type='text'], select, button {
+      padding: 10px 10px;
+      border: 0;
+      box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+    }
   }
 }
